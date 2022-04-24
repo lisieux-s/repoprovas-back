@@ -10,58 +10,70 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model users {
+model User {
   id Int @id @default(autoincrement())
   email String @unique
   password String
+
+  @@map("users")
 }
 
-model categories {
+model Category {
   id Int @id @default(autoincrement())
   name String @unique
 
-  tests tests[]
+  Test Test[]
+
+  @@map("categories")
 }
 
-model terms {
+model Term {
   id Int @id @default(autoincrement())
   teacherId Int
 
   teachers teachers @relation(fields: [teacherId], references: [id])
+
+  @@map("terms")
 }
 
-model disciplines {
+model Discipline {
   id Int @id @default(autoincrement())
   name String
 
-  teachersDisciplines teachersDisciplines[]
+  TeacherDiscipline TeacherDiscipline[]
+
+  @@map("disciplines")
 }
 
 model teachers {
   id Int @id @default(autoincrement())
   name String @unique
-  terms terms[]
+  Term Term[]
 
-  teachersDisciplines teachersDisciplines[]
+  TeacherDiscipline TeacherDiscipline[]
 }
 
-model teachersDisciplines {
+model TeacherDiscipline {
   id Int @id @default(autoincrement())
   teacherId Int 
   disciplineId Int
 
   teachers teachers @relation(fields: [teacherId], references: [id])
-  disciplines disciplines @relation(fields: [disciplineId], references: [id])
-  tests tests[]
+  Discipline Discipline @relation(fields: [disciplineId], references: [id])
+  Test Test[]
+
+  @@map("teachersDisciplines")
 }
 
-model tests {
+model Test {
   id Int @id @default(autoincrement())
   name String
   pdfUrl String
   categoryId Int
   teacherDisciplineId Int
   
-  categories categories @relation(fields: [categoryId], references: [id])
-  teacherDisciplines teachersDisciplines @relation(fields: [teacherDisciplineId], references: [id])
+  Category Category @relation(fields: [categoryId], references: [id])
+  TeacherDiscipline TeacherDiscipline @relation(fields: [teacherDisciplineId], references: [id])
+
+  @@map("tests")
 }
