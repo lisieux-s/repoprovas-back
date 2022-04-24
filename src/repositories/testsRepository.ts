@@ -1,9 +1,9 @@
 import { prisma } from '../database.js';
 
-async function findTestsByDiscipline() {
+async function findTestsByDiscipline(disciplineId: number) {
 
 }
 
-async function findTestsByTeacher() {
+async function findTestsByTeacher(teacherId: number) {
     
 }
