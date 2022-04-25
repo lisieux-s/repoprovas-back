@@ -12,3 +12,15 @@ export async function findByTeacher(req: Request, res: Response) {
     const tests = await testsService.findByTeacher(parseInt(id));
     res.send(tests);
 }
+
+export async function findDisciplines(req: Request, res: Response) {
+    const disciplines = await testsService.findDisciplines();
+    console.log(disciplines)
+    res.send(disciplines);
+}
+
+export async function findTeachers(req: Request, res: Response) {
+    const teachers = await testsService.findTeachers();
+    console.log(teachers)
+    res.send(teachers)
+}

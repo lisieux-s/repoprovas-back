@@ -5,6 +5,7 @@ import 'express-async-errors';
 import './setup.js'
 import router from './routers/index.js';
 import { handleErrorMiddleware } from './middlewares/handleErrorMiddleware.js';
+import { prisma } from './database.js'
 
 const app = express();
 app.use(cors());
